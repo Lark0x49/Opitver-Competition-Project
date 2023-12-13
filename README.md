@@ -1,1 +1,22 @@
 # Opitver-Competition-Project
+- stock_id  股票代码
+- date_id 日期
+- seconds_in_bucket 收盘集合竞价开始后过了多少秒，从0开始
+- imbalance_size 以当前的reference price成交的话，不能成交的规模
+- imbalance_buy_sell_flag 不平衡指标
+  - buy-side imbalance; 1
+  - sell-side imbalance; -1
+  - no imbalance; 0
+- reference_price “参考价”，在达到该价格时，可配对股票总数被最大化，股票买卖不平衡被最小化。也可以认为是买一和卖一价之间最接近的价格
+- matched_size 当前reference price下可成交的数量
+- far_price 集合竞价中，能使得成交量最大的意向报价价格
+- near_price 集合竞价和连续交易中，成交量最大的价格
+- [bid/ask]_price 买一/卖一 价
+- [bid/ask]_size 买一/卖一 规模
+- wap  
+  - weighted average price 加权均价
+  - BidPrice∗AskSize+AskPrice∗BidSizeBidSize+AskSize\frac{ {BidPrice * AskSize + AskPrice * BidSize}}{BidSize + AskSize}
+- target 
+  - 股票未来60秒的wap走势 - 合成指数未来60秒wap走势
+  - 单位为基点（0.01%）BP 
+  - Target=(StockWAPt+60StockWAPt−IndexWAPt+60IndexWAPt)∗10000Target = (\frac{StockWAP_{t+60}}{StockWAP_{t}} - \frac{IndexWAP_{t+60}}{IndexWAP_{t}}) * 10000
